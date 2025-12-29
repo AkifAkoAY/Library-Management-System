@@ -34,9 +34,8 @@ Ekstra paket kurulumuna gerek yoktur.
 
 📥 Kurulum
 
-Projeyi klonlayın veya indirin:
+Projeyi indirin:
 
-git clone https://github.com/kullanici-adi/Library-Management-System.git
 cd Library-Management-System
 
 
