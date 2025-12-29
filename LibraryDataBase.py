@@ -75,6 +75,61 @@ def update_book(book_id, title, author, year_published):
         connection.commit()
     return "Kitap basariyla guncellendi."
 
+def search_books_by_title(title):
+    with sqlite3.connect(DB_NAME) as connection:
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM books WHERE title LIKE ?', ('%' + title + '%',))
+        books = cursor.fetchall()
+    return books
+
+def search_books_by_author(author):
+    with sqlite3.connect(DB_NAME) as connection:
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM books WHERE author LIKE ?', ('%' + author + '%',))
+        books = cursor.fetchall()
+    return books
+
+def search_books_by_year(year_published):   
+    with sqlite3.connect(DB_NAME) as connection:
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM books WHERE year_published = ?', (year_published,))
+        books = cursor.fetchall()
+    return books
+
+def search_books():
+    print("\n--- Kitap Arama ---")
+    print("1. Basliga Gore Ara")
+    print("2. Yazara Gore Ara")
+    print("3. Yayin Yilina Gore Ara")
+    
+    choice = input("Seciminiz (1-3): ")
+    
+    if choice == '1':
+        title = input("Aranacak Baslik: ")
+        books = search_books_by_title(title)
+    elif choice == '2':
+        author = input("Aranacak Yazar: ")
+        books = search_books_by_author(author)
+    elif choice == '3':
+        try:
+            year_published = int(input("Aranacak Yayin Yili: "))
+            books = search_books_by_year(year_published)
+        except ValueError:
+            print("Hata: Gecerli bir yil girin.")
+            return
+    else:
+        print("Gecersiz secim.")
+        return
+    
+    if books:
+        print(f"\n--- Arama Sonuclari ({len(books)} kitap bulundu) ---")
+        print(f"{'ID':<5} {'Baslik':<30} {'Yazar':<20} {'Yil'}")
+        print("-" * 65)
+        for book in books:
+            print(f"{book[0]:<5} {book[1]:<30} {book[2]:<20} {book[3]}")
+    else:
+        print("\nArama kriterlerinize uygun kitap bulunamadi.")
+
 def main():
     create_connection()
     print("--- Kutuphane Yonetim Sistemi Baslatildi ---")
@@ -85,9 +140,10 @@ def main():
         print("2. Kitaplari Listele")
         print("3. Kitap Sil")
         print("4. Kitap Guncelle")
-        print("5. Cikis")
+        print("5. Kitap Ara")
+        print("6. Cikis")
         
-        choice = input("Seciminiz (1-5): ")
+        choice = input("Seciminiz (1-6): ")
         
         if choice == '1':
             title, author, year_published = input_book_details()
@@ -124,6 +180,9 @@ def main():
                 print("Hata: Gecerli bir ID numarasi girin.")
                 
         elif choice == '5':
+            search_books()
+            
+        elif choice == '6':
             print("Programdan cikiliyor. Iyi gunler!")
             break 
             
