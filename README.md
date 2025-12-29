@@ -1,32 +1,67 @@
-📚 Library Management System
-Bu proje, Python ve SQLite kullanılarak geliştirilmiş, komut satırı üzerinden çalışan basit ve etkili bir Kütüphane Yönetim Sistemi'dir. Kullanıcıların kitap bilgilerini bir veritabanında saklamasına, listelemesine, güncellemesine ve silmesine olanak tanır.
+📚 Library-Management-System
+
+Bu proje, SQLite veritabanı kullanan bir Komut Satırı (CLI) tabanlı Kütüphane Yönetim Sistemi’dir.
+Kullanıcılar kitap ekleme, listeleme, silme, güncelleme ve arama işlemlerini kolayca gerçekleştirebilir.
+
+📝 Proje Dosyası
+
+Ana Python Dosyası: LibraryDataBase.py
+
+Veritabanı Dosyası: library.db (Program çalıştığında otomatik oluşturulur)
 
 ✨ Özellikler
-Kitap Ekleme: Kitap adı, yazar ve yayın yılı bilgilerini kaydeder.
 
-Kitap Listeleme: Veritabanındaki tüm kitapları düzenli bir tablo formatında görüntüler.
+✔️ SQLite ile kalıcı veri saklama
 
-Kitap Güncelleme: Mevcut kitapların bilgilerini ID numarası üzerinden değiştirir.
+✔️ Kitap ekleme
 
-Kitap Silme: İstenilen kitabı ID numarası ile veritabanından kalıcı olarak kaldırır.
+✔️ Kitap listeleme
 
-Hata Yönetimi: Geçersiz veri girişlerine (boş isim, yanlış yıl formatı vb.) karşı koruma sağlar.
+✔️ Kitap silme
 
-🛠 Kullanılan Teknolojiler
-Dil: Python 3.x
+✔️ Kitap güncelleme
 
-Veritabanı: SQLite3 (Gömülü veritabanı olduğu için ek bir kurulum gerektirmez)
+✔️ Başlık, yazar veya yayın yılına göre arama
 
-📂 Dosya Yapısı
-LibraryDataBase.py: Uygulamanın tüm mantığını ve veritabanı işlemlerini içeren ana dosya.
+✔️ Giriş kontrolleri ve hata yakalama
 
-library.db: Uygulama ilk kez çalıştırıldığında otomatik olarak oluşturulan veritabanı dosyası.
+🛠️ Kullanılan Teknolojiler
 
-📝 Kullanım Notları
-Program başlatıldığında karşınıza bir menü çıkacaktır:
+Python 3
 
-Kitap eklemek için 1'e basın.
+SQLite (sqlite3 kütüphanesi)
+Ekstra paket kurulumuna gerek yoktur.
 
-Tüm listeyi görmek için 2'ye basın.
+📥 Kurulum
 
-Bir kaydı silmek için listedeki ID numarasını kullanın.
+Projeyi klonlayın veya indirin:
+
+git clone https://github.com/kullanici-adi/Library-Management-System.git
+cd Library-Management-System
+
+
+Çalıştırmak için:
+
+python LibraryDataBase.py
+
+▶️ Kullanım
+
+Program açıldığında aşağıdaki menü görünür:
+
+=== MENU ===
+1. Kitap Ekle
+2. Kitaplari Listele
+3. Kitap Sil
+4. Kitap Guncelle
+5. Kitap Ara
+6. Cikis
+
+
+Her seçenek ilgili işlemi yapmanızı sağlar.
+
+🗂️ Veritabanı Yapısı
+Alan	Tip
+id	INTEGER PRIMARY KEY AUTOINCREMENT
+title	TEXT
+author	TEXT
+year_published	INTEGER
